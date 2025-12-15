@@ -11,6 +11,9 @@ data/
 *.pyo
 *.pyd
 
+# Database files
+.journal
+
 # Model files
 *.pt
 
