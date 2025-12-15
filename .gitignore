@@ -15,6 +15,9 @@ data/
 .journal
 .db-journal
 
+# Audio files
+*.wav
+
 # Model files
 *.pt
 
