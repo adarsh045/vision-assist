@@ -15,7 +15,7 @@ YOLO_MODEL_NAME = "yolov8s.pt"
 
 WHISPER_MODEL_NAME = "small.en"
 
-WHISPER_ACCESS_MODE = "offline"  # options: 'offline', 'online'
+WHISPER_ACCESS_MODE = "online"  # options: 'offline', 'online'
 
 ENVITRONMENT = {
     "type" : "production",  # options: 'development', 'production'
