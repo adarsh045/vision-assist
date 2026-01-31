@@ -17,6 +17,7 @@ data/
 
 # Audio files
 *.wav
+*.mp3
 
 # Model files
 *.pt
