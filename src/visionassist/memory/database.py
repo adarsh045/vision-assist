@@ -1,6 +1,6 @@
 import json
 from sqlalchemy import create_engine, select, delete, func
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, joinedload
 from visionassist.config import MAX_OBJECT_ENTRIES
 from .models import Base, Detection, DetectedObject
 
@@ -56,6 +56,7 @@ class Database:
         with self.SessionLocal() as db:
             stmt = (
                 select(DetectedObject)
+                .options(joinedload(DetectedObject.detection))
                 .where(DetectedObject.object_name == object_name)
                 .order_by(DetectedObject.timestamp.desc())
                 .limit(limit)
