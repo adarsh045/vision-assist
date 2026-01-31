@@ -11,11 +11,13 @@ MIN_CONFIDENCE = 0.6
 
 IMAGE_DIR = "data/images/"
 
-YOLO_MODEL_NAME = "yolov8s.pt"
+YOLO_MODEL_NAME = "yolov10m.pt"
 
 WHISPER_MODEL_NAME = "small.en"
 
 WHISPER_ACCESS_MODE = "online"  # options: 'offline', 'online'
+
+LLM_MODEL_PROVIDER = "ollama"  # options: 'gemini', 'ollama'
 
 ENVITRONMENT = {
     "type" : "production",  # options: 'development', 'production'
@@ -23,5 +25,8 @@ ENVITRONMENT = {
     "log_level": "INFO",  # options: 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'
     
     "WHISPER_API_URL": os.getenv("WHISPER_API_URL", None),
-    "WHISPER_API_KEY": os.getenv("WHISPER_API_KEY", None)
+    "WHISPER_API_KEY": os.getenv("WHISPER_API_KEY", None),
+    "GEMINI_API_KEY": os.getenv("GEMINI_API_KEY", None),
+    "OLLAMA_API_URL": os.getenv("OLLAMA_API_URL", None),
+    "OLLAMA_API_KEY": os.getenv("OLLAMA_API_KEY", None),
 }
