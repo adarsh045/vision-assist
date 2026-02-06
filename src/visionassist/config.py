@@ -7,7 +7,7 @@ MAX_OBJECT_ENTRIES = 50
 
 ALLOWED_LABELS = ['backpack', 'umbrella', 'handbag', 'suitcase', 'bottle', 'cup', 'laptop', 'mouse', 'cell phone', 'book', 'scissors']
 
-MIN_CONFIDENCE = 0.6
+MIN_CONFIDENCE = 0.5
 
 IMAGE_DIR = "data/images/"
 
@@ -20,7 +20,7 @@ WHISPER_ACCESS_MODE = "online"  # options: 'offline', 'online'
 LLM_MODEL_PROVIDER = "ollama"  # options: 'gemini', 'ollama'
 
 ENVITRONMENT = {
-    "type" : "production",  # options: 'development', 'production'
+    "type" : "development",  # options: 'development', 'production'
     "debug": False, # True or False
     "log_level": "INFO",  # options: 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'
     

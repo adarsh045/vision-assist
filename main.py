@@ -109,15 +109,52 @@ class VisionAssistApp:
     def keyboard_listener(self):
         """Listen for keyboard events."""
         logger.info("Keyboard listener started")
-        logger.info("Press 'r' to START/STOP recording")
+        logger.info("Press '2' to START/STOP recording")
         
         while self.running:
             try:
-                keyboard.wait('r')
+                keyboard.wait('2')
                 self.handle_recording()
             except Exception as e:
                 logger.error(f"Keyboard listener error: {e}")
                 break
+
+    def input_listener(self):
+        """Listen for keyboard events. For giving input prompts instead of recording."""
+        logger.info("Input listener started")
+        logger.info("Press '1' to START/STOP input mode")
+        
+        while self.running:
+            try:
+                keyboard.wait('1')
+                self.handle_input()
+            except Exception as e:
+                logger.error(f"Input listener error: {e}")
+                break
+
+    def handle_input(self):
+        try:
+            query = input("Enter your query : ")
+
+            label = self.llm_model.predict_label(query)
+
+            if label in ALLOWED_LABELS:
+            
+                object_data = self.db.get_latest_objects(object_name=label, limit=1)
+                # logger.info(f"Object: {object_data[0].object_name}, Confidence: {object_data[0].confidence}, BBox: {object_data[0].bbox}")
+                # logger.info(f"Image path: {object_data[0].detection.image_path}")
+                try:
+                    analysis = self.llm_model.analyze_image(object_data[0].detection.image_path, label)
+
+                    logger.info(f"Analysis: {analysis}")
+                    
+                    audio_path = self.audio_out.generate_audio(analysis)
+                    
+                    playsound(audio_path)
+                except Exception as e:
+                    logger.error(f"Error during image analysis or audio generation: {e}")
+        except Exception as e:
+            logger.error(f"Input handling error: {e}")
 
     def realtime_stream(self):
         """Run the real-time video detection stream."""
@@ -131,6 +168,9 @@ class VisionAssistApp:
         if self.recorder:
             keyboard_thread = threading.Thread(target=self.keyboard_listener, daemon=True)
             keyboard_thread.start()
+
+            keyboard_thread_input = threading.Thread(target=self.input_listener, daemon=True)
+            keyboard_thread_input.start()
 
         try:
             while True:
