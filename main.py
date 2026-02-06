@@ -148,9 +148,9 @@ class VisionAssistApp:
 
                     logger.info(f"Analysis: {analysis}")
                     
-                    audio_path = self.audio_out.generate_audio(analysis)
+                    # audio_path = self.audio_out.generate_audio(analysis)
                     
-                    playsound(audio_path)
+                    # playsound(audio_path)
                 except Exception as e:
                     logger.error(f"Error during image analysis or audio generation: {e}")
         except Exception as e:
